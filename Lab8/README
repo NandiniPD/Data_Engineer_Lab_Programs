@@ -1,0 +1,105 @@
+# 🏥 Snowflake Hospital Data Pipeline – Stream & Task Automation
+
+## 📘 Overview
+This lab demonstrates how to design and automate a hospital data cleaning pipeline using **Snowflake Streams** and **Tasks**. The workflow ingests messy raw data, cleans it automatically, and stores standardized records for analytics.
+
+---
+
+## 🧠 Objective
+To implement a fully automated data cleaning and transformation pipeline that:
+1. Ingests raw, unstructured hospital data.
+2. Cleans and converts it into analyzable formats.
+3. Uses Snowflake Streams and Tasks for continuous automation.
+4. Ensures real-time accuracy and auditability in patient data.
+
+---
+
+## ⚙️ Tech Stack
+- Database: Snowflake  
+- Tools: SnowSQL / Snowflake Web Interface  
+- Language: SQL  
+- Key Concepts: Database Design, Streams, Tasks, Incremental Processing  
+
+---
+
+## 🧾 Step-by-Step Procedure
+
+### **Step 1: Database and Schema Creation**
+A new database named **HOSPITAL_DB** and a schema **PATIENT_SCHEMA** are created to organize hospital data.  
+Raw and cleaned data are separated into distinct schema layers for better isolation, security, and data lineage.
+
+---
+
+### **Step 2: Table Design**
+Two tables are designed:
+- **RAW_PATIENTS** — stores unprocessed input data with flexible datatypes to handle inconsistencies.  
+- **CLEAN_PATIENTS** — stores cleaned, validated, and typed data ready for analytics.  
+A `processed_at` column is added to track data freshness and processing time.
+
+---
+
+### **Step 3: Stream Creation**
+A stream is established on the `RAW_PATIENTS` table to automatically track any new or modified records.  
+This enables **incremental change detection** without re-scanning the entire table.
+
+---
+
+### **Step 4: Data Cleaning Task**
+A task is defined to process new records captured by the stream.  
+It performs data type conversions, standardizes formats, fills missing values, and ensures consistent entries for age, dates, and bill amounts.
+
+---
+
+### **Step 5: Task Scheduling**
+The cleaning task is scheduled to execute automatically every **10 minutes**.  
+This ensures continuous data hygiene and removes the need for manual intervention.
+
+---
+
+### **Step 6: Inserting Messy Data**
+Sample raw data with inconsistencies (text-based numbers, mixed date formats, commas in numeric fields, and missing values) is inserted into the raw table.  
+This data acts as input for the cleaning pipeline.
+
+---
+
+### **Step 7: Manual Task Execution**
+The cleaning task can also be executed manually when needed — for example, during initial testing, debugging, or when automatic scheduling is paused.  
+Manual execution helps verify the transformation logic immediately.
+
+---
+
+### **Step 8: Verification**
+After the task runs, the `CLEAN_PATIENTS` table is checked to ensure:
+- Proper type conversions.  
+- Valid date formatting.  
+- Missing or invalid data handled with defaults.  
+- Fresh timestamps for every processed record.
+
+---
+
+### **Step 9: Extension (Optional)**
+To improve data quality monitoring, an additional process can flag records missing key fields such as `diagnosis_code`.  
+These flagged records can be reviewed manually or routed to a separate table for correction.
+
+---
+
+### **Step 10: Reflection**
+This architecture leverages **Snowflake Streams** and **Tasks** for automated, real-time data cleaning.  
+Unlike traditional batch ETL, this design ensures:
+- Immediate availability of cleaned data.  
+- Incremental, efficient updates.  
+- Reduced operational overhead.  
+- Reliable auditability of data flow.
+
+---
+
+## ✅ Summary
+This lab successfully implemented a **real-time, automated data cleaning system** in Snowflake that transforms messy hospital data into clean, analytics-ready datasets — demonstrating modern data engineering best practices for healthcare systems.
+
+---
+
+**Author:**  
+*Your Name*  
+*USN: [Your USN]*  
+*Course: Data Engineering Lab – Hospital Data Pipeline*  
+*Date: [Insert Date]*  
