@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw
+    database: SALES_DB
+    schema: SALES_SCHEMA
+    tables:
+      - name: CUSTOMERS
+      - name: EMPLOYEES
+      - name: OFFICES
+      - name: ORDERS
+      - name: ORDERDETAILS
+      - name: PRODUCTS
+      - name: PRODUCTLINES
